@@ -22,7 +22,7 @@ public struct CDJoystickData: CustomStringConvertible {
 }
 
 @IBDesignable
-public class CDJoystick: UIView {
+open class CDJoystick: UIView {
 
     @IBInspectable public var substrateColor: UIColor = #colorLiteral(red: 0.7233663201, green: 0.7233663201, blue: 0.7233663201, alpha: 1) { didSet { setNeedsDisplay() }}
     @IBInspectable public var substrateBorderColor: UIColor = #colorLiteral(red: 0.7233663201, green: 0.7233663201, blue: 0.7233663201, alpha: 1) { didSet { setNeedsDisplay() }}
@@ -69,7 +69,7 @@ public class CDJoystick: UIView {
         trackingHandler?(data)
     }
 
-    public override func draw(_ rect: CGRect) {
+    open override func draw(_ rect: CGRect) {
         alpha = fade
 
         layer.backgroundColor = substrateColor.cgColor
@@ -91,7 +91,7 @@ public class CDJoystick: UIView {
         }
     }
 
-    public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         tracking = true
 
         UIView.animate(withDuration: 0.1) {
@@ -99,7 +99,7 @@ public class CDJoystick: UIView {
         }
     }
 
-    public override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+    open override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
 
         let location = touch.location(in: self)
@@ -120,11 +120,11 @@ public class CDJoystick: UIView {
         data = CDJoystickData(velocity: CGPoint(x: x, y: y), angle: -atan2(x, y) + CGFloat(Double.pi))
     }
 
-    public override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+    open override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         reset()
     }
 
-    public override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+    open override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         reset()
     }
 
